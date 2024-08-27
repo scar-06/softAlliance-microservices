@@ -33,7 +33,7 @@ To run this project on your machine, make sure you have Java installed. Then, fo
 git clone https://github.com/scar-06/softAlliance-microservices
 ```
 
-5. Access the Swagger UI
+2. Access the Swagger UI
 
 ```
 http://localhost:8080/swagger-ui.html
