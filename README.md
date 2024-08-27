@@ -33,10 +33,22 @@ To run this project on your machine, make sure you have Java installed. Then, fo
 git clone https://github.com/scar-06/softAlliance-microservices
 ```
 
-2. Access the Swagger UI
+2. Run each microservice
+
+```
+run each of the SpringBoot projects inside: authentication; employee-mgmt; service-registry; api-gateway
+```
+
+3. Access the Swagger UI
 
 ```
 http://localhost:8080/swagger-ui.html
+```
+
+4. Access the Eureka UI
+
+```
+http://localhost:8761
 ```
 
 ## Endpoints
