@@ -1,11 +1,18 @@
 package com.codesofscar.employee_mgmt.controller;
 
 import com.codesofscar.employee_mgmt.dto.EmployeesDTO;
+import com.codesofscar.employee_mgmt.dto.ErrorResponseDTO;
 import com.codesofscar.employee_mgmt.dto.ResponseDTO;
 import com.codesofscar.employee_mgmt.dto.UserDto;
 import com.codesofscar.employee_mgmt.service.impl.DepartmentServiceImpl;
 import com.codesofscar.employee_mgmt.service.impl.EmployeesServiceImpl;
 import com.codesofscar.employee_mgmt.constants.EmployeeConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +23,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employee")
+@Tag(
+        name = "CRUD REST APIs for Employee Management",
+        description = "CRUD REST APIs to CREATE, FETCH, UPDATE and DELETE employees"
+)
 public class EmployeesController {
     private EmployeesServiceImpl userService;
     private DepartmentServiceImpl departmentService;
@@ -26,6 +37,24 @@ public class EmployeesController {
         this.departmentService = departmentService;
     }
 
+    @Operation(
+            summary = "Admin Update User For Employee REST API",
+            description = "REST API for admin to update employee user details"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
     @PutMapping("/update-employee/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO> updateEmployee(@RequestBody UserDto employeeDTO,
@@ -42,6 +71,25 @@ public class EmployeesController {
         }
     }
 
+    @Operation(
+            summary = "Admin Delete User For Employee REST API",
+            description = "REST API for admin to delete user employee"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
+
     @DeleteMapping("/delete-employee/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO> deleteEmployee(@PathVariable Long userId) {
@@ -57,7 +105,24 @@ public class EmployeesController {
         }
     }
 
-
+    @Operation(
+            summary = "View Employee REST API",
+            description = "REST API for admin to delete user employee"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
     @GetMapping("/get-employee/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserDto> viewEmployee(@PathVariable Long userId) {
@@ -66,6 +131,25 @@ public class EmployeesController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeDTO);
     }
 
+    @Operation(
+            summary = "View Employees in Department REST API",
+            description = "REST API for Admin/Manager to delete employee"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    }
+    )
+
     @GetMapping("/get-department-employees/{userId}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     public ResponseEntity<List<EmployeesDTO>> viewEmployeesByDepartment(@PathVariable Long departmentId) {
@@ -73,15 +157,6 @@ public class EmployeesController {
 
         return ResponseEntity.status(HttpStatus.OK).body(employeesByDepartment);
     }
-//
-//    private UserDto convertToDto(Employees user) {
-//        return new UserDto(
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getEmail(),
-//                user.getPhoneNumber()
-//        );
-//    }
 
 
 }

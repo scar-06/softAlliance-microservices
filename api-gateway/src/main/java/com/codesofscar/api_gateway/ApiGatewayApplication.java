@@ -1,6 +1,5 @@
-package com.codesofscar.authentication;
+package com.codesofscar.api_gateway;
 
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -25,10 +24,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 				)
 		)
 )
-public class AuthenticationApplication {
+public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationApplication.class, args);
+		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
 }

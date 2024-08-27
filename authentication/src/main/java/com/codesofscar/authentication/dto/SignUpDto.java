@@ -1,6 +1,7 @@
 package com.codesofscar.authentication.dto;
 
 import com.codesofscar.authentication.enums.Role;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -14,6 +15,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(
+        name = "ErrorResponse",
+        description = "Schema to sign up employee"
+)
 public class SignUpDto {
     @Size(min = 3, message = "First name must be at least 3 characters")
     private String firstName;

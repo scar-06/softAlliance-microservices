@@ -20,8 +20,4 @@ public class LogoutServiceImpl implements LogoutHandler {
         SecurityContextHolder.clearContext();
     }
 }
-/*
-Clears the security context. The security context holds details
-about the currently authenticated user, and clearing it effectively logs the user out.
- */
 

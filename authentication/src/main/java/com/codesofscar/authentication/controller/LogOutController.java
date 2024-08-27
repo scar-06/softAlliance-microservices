@@ -2,6 +2,7 @@ package com.codesofscar.authentication.controller;
 
 import com.codesofscar.authentication.service.impl.LogoutServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @PreAuthorize("hasAnyRole()")
 @RequestMapping("/api/auth/")
 @RequiredArgsConstructor
+@Tag(
+        name = "CRUD REST APIs for Logging out",
+        description = "REST APIs to logout users"
+)
 public class LogOutController {
 
     private final LogoutServiceImpl logoutService;

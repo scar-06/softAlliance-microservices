@@ -1,5 +1,6 @@
 package com.codesofscar.employee_mgmt.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Builder
+@Schema(
+        name = "Base User",
+        description = "Schema to fill base user details"
+)
 public class UserDto {
     private String firstName;
     private String lastName;
